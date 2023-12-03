@@ -1,4 +1,7 @@
 "use server";
+import { v4 as uuid } from "uuid";
+
+import AnimeCard, { AnimeProp } from "@/components/AnimeCard";
 
 export const fetchAnime = async (page: number) => {
   const rapidAPIKey = process.env.X_RapidAPI_Key;
@@ -22,7 +25,10 @@ export const fetchAnime = async (page: number) => {
 
   const data = await response.json();
 
-  return data;
+  return (
+    data &&
+    data.map((item: AnimeProp, index: number) => (
+      <AnimeCard key={uuid()} anime={item} index={index} />
+    ))
+  );
 };
-
-//   const response = await fetch(`https://jsonplaceholder.typicode.com/users?page=${page}limit=8order=popularity`);
