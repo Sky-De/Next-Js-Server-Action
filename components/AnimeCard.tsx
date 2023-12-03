@@ -1,15 +1,23 @@
 import Image from "next/image";
 
 export interface AnimeProp {
-  id: string;
+  id: number;
   name: string;
+  russian: string;
   image: {
     original: string;
+    preview: string;
+    x96: string;
+    x48: string;
   };
+  url: string;
   kind: string;
+  score: string;
+  status: string;
   episodes: number;
   episodes_aired: number;
-  score: string;
+  aired_on: string;
+  released_on: null | string;
 }
 
 interface Prop {
@@ -18,15 +26,19 @@ interface Prop {
 }
 
 function AnimeCard({ anime }: Prop) {
+  // console.log(anime);
+
   return (
     <div className="max-w-sm rounded relative w-full">
-      <div className="relative w-full h-[37vh]">
-        <Image
-          src={anime.image.original}
-          alt={anime.name}
-          fill
-          className="rounded-xl"
-        />
+      <div className="relative w-full h-[50vh]">
+        {anime?.image?.original && (
+          <Image
+            src={`https://shikimori.one${anime.image.original}`}
+            alt={anime.name}
+            fill
+            className="rounded-xl"
+          />
+        )}
       </div>
       <div className="py-4 flex flex-col gap-3">
         <div className="flex justify-between items-center gap-1">
@@ -48,9 +60,7 @@ function AnimeCard({ anime }: Prop) {
               height={20}
               className="object-contain"
             />
-            <p className="text-base text-white font-bold">
-              {anime.episodes || anime.episodes_aired}
-            </p>
+            <p className="text-base text-white font-bold">{anime.episodes}</p>
           </div>
           <div className="flex flex-row gap-2 items-center">
             <Image
