@@ -7,6 +7,7 @@ function Hero() {
       <div className="flex-1 flex flex-col gap-10">
         <Image
           src={Logo}
+          loading="eager"
           alt="logo"
           width={121}
           height={109}
@@ -18,7 +19,13 @@ function Hero() {
         </h1>
       </div>
       <div className="lg:flex-1 relative w-full h-[70vh] justify-center">
-        <Image src="/anime.png" alt="anime" fill className="object-contain" />
+        <Image
+          src="/anime.png"
+          alt="anime"
+          loading="eager"
+          fill
+          className="object-contain"
+        />
       </div>
     </header>
   );
